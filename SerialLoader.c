@@ -225,9 +225,9 @@ void serialSetup()
 	// Input with pullup, 1000B, and set the ODR bit
 
 	GPIOB->CRL = (GPIOB->CRL & 0xFFFF0F0F) | 0x00002020 ;	// PB1 and PB3, invert controls
-	GPIOB->BRR = 0x00000008 ;
-	GPIOB->BSRR = 0x00000002 ;
-	//GPIOB->BSRR = 0x0000000A ;
+	//GPIOB->BRR = 0x00000008 ;
+	//GPIOB->BSRR = 0x00000002 ;
+	GPIOB->BSRR = 0x0000000A ;
 }
 
 uint32_t checkSerialBindButtonPressed()
