@@ -28,7 +28,7 @@ extern void flashUnlock(void) ;
 uint32_t checkUserCode(u32 usrAddr) ;
 void jumpToUser(u32 usrAddr) ;
 
-void loader( uint8_t check ) ;
+void loader( uint32_t check ) ;
 
 uint32_t ResetReason ;
 uint32_t LongCount ;
@@ -41,6 +41,7 @@ static void start_timer2()
 	TIM2->CNT = 0 ;
 	TIM2->PSC = 71 ;			// 72-1;for 72 MHZ /1.0usec/(71+1)
 	TIM2->ARR = 0xFFFF;		//count till max
+	TIM2->CR1 = 1 ;
 }
 
 //void RCC_DeInit(void)
@@ -185,6 +186,7 @@ static void serialInit()
 {
 	RCC->APB1ENR |= RCC_APB1ENR_USART2EN ;		// Enable clock
 	RCC->APB1ENR |= RCC_APB1ENR_USART3EN ;		// Enable clock
+	RCC->APB1ENR |= RCC_APB1ENR_TIM2EN	  ;     //enable tim2 clock
 	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN ;
 	RCC->APB2ENR |= RCC_APB2ENR_IOPBEN ;
 	RCC->APB2ENR |= RCC_APB2ENR_AFIOEN ;
@@ -296,7 +298,7 @@ void testLoader()
 	return ;
 }
 
-void loader( uint8_t check )
+void loader( uint32_t check )
 {
   uint8_t ch ;
   uint8_t GPIOR0 ;
