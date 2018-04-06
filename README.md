@@ -1,7 +1,7 @@
 # Files
 Modified Dual boot (serial/usb) bootloader from the Multiprotocol 4in1 project to work with the 1st generation IrangeX pro 4in1 module 
 that did not have the  usb port.  This module version has a defect in the inverter circuit that only allows it to work with inverted comms.
-This bootloader also fixes the issue with some modules not booting correctly in the taranis.  The source for the bootloader is hosted on Mike Blandford's repository at: https://github.com/MikeBland/StmDualBoot.  I've posted just file I modified (SerialLoader.c) here from the repository for reference.
+This bootloader also fixes the issue with some modules not booting correctly in the taranis.  The source for the bootloader is hosted on Mike Blandford's repository at: https://github.com/MikeBland/StmDualBoot.  I've posted the file I modified (SerialLoader.c) here from the repository for reference.
 There are two versions.  The invert version is for the 1st generation irangex pro while the noninv is simply a fix for the bootup problem on the taranis.
 To use the invert version, you will need to insure you select inverted comm as YES in the flashing application.
 
