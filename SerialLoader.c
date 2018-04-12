@@ -293,7 +293,7 @@ void testLoader()
 			
 	if ( checkSerialBindButtonPressed() )	// Load from Tx
 	{
-		loader(ch) ;
+		loader(0) ;
 	}
 	return ;
 }
@@ -361,8 +361,8 @@ void loader( uint32_t check )
 					}
 					else
 					{
-					
-						return ;
+						if (check) //return if not bind button pressed
+							return ;
 					}
 				}
 				lastCh = ch ; 
