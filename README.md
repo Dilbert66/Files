@@ -15,6 +15,7 @@ stm32flash -v -g 0x0 -b 57600 -w \path_to_file\stm32dualboot_inv.bin COMx
 where comx is the com port of your ftdi adapter and \path_to_file\ is the full path of the location of the bootloader file
 
 NOTE: You WILL need to re-flash the Multiprotocol.bin to your module after updating the bootloader since it clears everything.
+NOTE ii:  Ensure you use the latest Multi Flash App from Mikes ersky9x thread at: http://openrcforums.com/forum/viewtopic.php?f=7&t=4676
 
 
 
