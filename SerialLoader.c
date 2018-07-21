@@ -35,6 +35,7 @@ uint32_t LongCount ;
 uint8_t Buff[512] ;
 
 uint8_t NotSynced ;
+uint8_t SyncCount;
 
 static void start_timer2()
 {	
@@ -215,6 +216,17 @@ uint32_t resetReason()
 	return ( ResetReason & RCC_CSR_SFTRSTF ) ? 1 : 0 ;
 }
 
+void SetNormalPort() {
+	
+	GPIOB->BRR = 0x00000008 ; 
+	GPIOB->BSRR = 0x00000002 ;
+}
+
+void SetInvertedPort() {
+	
+	GPIOB->BSRR = 0x0000000A ;
+}
+
 void serialSetup()
 {
 	serialInit() ;
@@ -227,9 +239,10 @@ void serialSetup()
 	// Input with pullup, 1000B, and set the ODR bit
 
 	GPIOB->CRL = (GPIOB->CRL & 0xFFFF0F0F) | 0x00002020 ;	// PB1 and PB3, invert controls
-	//GPIOB->BRR = 0x00000008 ;
-	//GPIOB->BSRR = 0x00000002 ;
-	GPIOB->BSRR = 0x0000000A ;
+	GPIOB->BRR = 0x00000008 ; //start comms without inversion
+	GPIOB->BSRR = 0x00000002 ;
+	//GPIOB->BSRR = 0x0000000A ;
+	//SetInvertedPort();
 }
 
 uint32_t checkSerialBindButtonPressed()
@@ -265,6 +278,7 @@ void verifySpace()
 		return ;
 	
   }
+  
   putch(STK_INSYNC);
 }
 
@@ -340,6 +354,7 @@ void loader( uint32_t check )
 	
 
 	NotSynced = 1 ;
+	SyncCount=0;
 	lastCh = check;
 	
 	for (;;)
@@ -378,6 +393,11 @@ void loader( uint32_t check )
 	flashUnlock();
     /* get character from UART */
     ch = getch() ;
+	if (ch==STK_GET_SYNC) SyncCount++;
+	if (SyncCount> 5) {
+		SetInvertedPort();
+		SyncCount=0;
+	}
     if(ch == STK_GET_PARAMETER)
 		{
       GPIOR0 = getch() ;
