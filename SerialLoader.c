@@ -16,8 +16,10 @@
 #include "stm32f10x.h"
 
 #include "stk500.h"
+
 //#include "stm32f10x_flash.h"
 //#include "hardware.h"
+
 
 #define OPTIBOOT_MAJVER 4
 #define OPTIBOOT_MINVER 6
@@ -318,7 +320,7 @@ void loader( uint32_t check )
   uint8_t GPIOR0 ;
 	uint32_t address = 0 ;
   uint8_t lastCh ;
-  
+  uint8_t is_inverted=0;
 
 //	ResetReason = RCC->CSR ;
 //  RCC->CSR |= RCC_CSR_RMVF ;
@@ -355,6 +357,7 @@ void loader( uint32_t check )
 
 	NotSynced = 1 ;
 	SyncCount=0;
+	
 	lastCh = check;
 	
 	for (;;)
@@ -393,9 +396,19 @@ void loader( uint32_t check )
 	flashUnlock();
     /* get character from UART */
     ch = getch() ;
-	if (ch==STK_GET_SYNC) SyncCount++;
+	if (ch==STK_GET_SYNC) 
+		SyncCount++;
+	else
+		SyncCount=0;
+	
 	if (SyncCount> 5) {
-		SetInvertedPort();
+		if(is_inverted==1){
+			SetNormalPort();
+			is_inverted=0;
+		} else  {
+			SetInvertedPort();
+			is_inverted=1;
+		}
 		SyncCount=0;
 	}
     if(ch == STK_GET_PARAMETER)
