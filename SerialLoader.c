@@ -396,21 +396,27 @@ void loader( uint32_t check )
 	flashUnlock();
     /* get character from UART */
     ch = getch() ;
-	if (ch==STK_GET_SYNC) // we only count if we get 5 syncs in a row. Any other value restarts the count
+	
+	if (ch == STK_GET_SYNC) // we only count if we get 5 syncs in a row. Any other value restarts the count
 		SyncCount++;
 	else
 		SyncCount=0; 
 	
-	if (SyncCount> 5) { //toggle tx inversion every 5 sequential sync requests
-		if(is_inverted==1){
+	if (SyncCount> 5) 
+	{ //toggle tx inversion every 5 sequential sync requests
+		if (is_inverted==1)
+		{
 			SetNormalPort();
 			is_inverted=0;
-		} else  {
+		} 
+		else  
+		{
 			SetInvertedPort();
 			is_inverted=1;
 		}
 		SyncCount=0;
 	}
+	
     if(ch == STK_GET_PARAMETER)
 		{
       GPIOR0 = getch() ;
