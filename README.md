@@ -5,6 +5,13 @@ that did not have the  usb port.  This module version has a defect in the invert
 This bootloader version instead uses inverted rx comms and also fixes an issue with some modules not booting correctly in the taranis.   
 
 The source for the bootloader is hosted on Mike Blandford's repository at: https://github.com/MikeBland/StmDualBoot.  I've posted the file I modified (SerialLoader.c) here from the repository for reference.
+
+
+
+EDIT: July 20/2018 -  The _inv and _noninv should no longer be used. A new universal auto detect bootloader is being tested which will detect the port invert mode being used and switch accordingly.  The file to use is "stmdualboot.bin"
+
+
+
  The invert version is mainly for the 1st generation irangex pro (while it will also work with all modules)  while the noninv is simply a fix for the bootup problem on the taranis for those that don't want to use the inverted comm option when flashing when using other modules.
  
  
@@ -20,6 +27,11 @@ where comx is the com port of your ftdi adapter and \path_to_file\ is the full p
 NOTE: You WILL need to re-flash the Multiprotocol.bin to your module either using USB or flash from your transmitter after updating the bootloader since it clears everything.
 
 NOTE ii:  Ensure you use the latest Multi Flash App from Mikes ersky9x thread at: http://openrcforums.com/forum/viewtopic.php?f=7&t=4676
+
+
+
+
+
 
 
 
