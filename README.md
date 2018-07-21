@@ -20,7 +20,7 @@ To use the invert version, you will need to insure you select inverted comm as Y
 
 To flash, if using windows run the stm32flash utility from the "DIY-Multiprotocol-TX-Module\BootLoaders\Boards\stm32\tools\win" directory.
 
-stm32flash -v -g 0x0 -b 57600 -w \path_to_file\stm32dualboot_inv.bin COMx   
+stm32flash -v -g 0x0 -b 57600 -w \path_to_file\stm32dualboot.bin COMx   
 
 where comx is the com port of your ftdi adapter and \path_to_file\ is the full path of the location of the bootloader file
 
