@@ -1,4 +1,15 @@
 # Files
+
+EDIT: July 21/2018 - The changes here are now integrated into the DIY Multiprotocol code. Please go to the DIY Multiprotocol projects page to update your bootloader to the latest version.  See the post below:
+
+https://www.rcgroups.com/forums/showpost.php?p=39970423&postcount=12077
+
+
+The info below is now outdated.  Kept here for reference only.  
+
+
+
+
 Modified Dual boot (serial/usb) bootloader from the Multiprotocol 4in1 project to work with the 1st generation IrangeX pro 4in1 module 
 that did not have the  usb port.  This module version has a defect in the inverter circuit that only allows it to work with inverted comms. Since the current bootloader included with the latest Multiprotocol distribution sets up the module to use non-inverted receive communications, this won't work with those problematic modules. 
 
